@@ -10,10 +10,10 @@ public interface CrudDAO<T extends SuperEntity,ID> extends SuperDAO {
 
     public abstract T find(ID id)throws Exception;
 
-    public abstract boolean save(T entity)throws Exception;
+    public abstract void save(T entity)throws Exception;
 
-    public abstract boolean update(T entity)throws Exception;
+    public abstract void update(T entity)throws Exception;
 
-    public abstract boolean delete(ID id)throws Exception;
+    public abstract void delete(ID id)throws Exception;
 
 }

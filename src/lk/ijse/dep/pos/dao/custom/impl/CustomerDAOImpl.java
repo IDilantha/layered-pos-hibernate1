@@ -3,6 +3,7 @@ package lk.ijse.dep.pos.dao.custom.impl;
 import lk.ijse.dep.pos.dao.CrudUtil;
 import lk.ijse.dep.pos.dao.custom.CustomerDAO;
 import lk.ijse.dep.pos.entity.Customer;
+import org.hibernate.Session;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,50 +11,35 @@ import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
 
+    private Session session;
+
     @Override
     public String getLastCustomerId() throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT customerId FROM Customer ORDER BY customerId DESC LIMIT 1");
-        if (rst.next()) {
-            return rst.getString(1);
-        }
-        return null;
+        return (String) session.createNativeQuery("SELECT customerId FROM Customer ORDER BY customerId DESC LIMIT 1").uniqueResult();
     }
 
     @Override
     public List<Customer> findAll() throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer");
-        List<Customer> customers = new ArrayList<>();
-        while (rst.next()) {
-            customers.add(new Customer(rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3)));
-        }
-        return customers;
+        return session.createQuery("FROM Customer",Customer.class).list();
     }
 
     @Override
     public Customer find(String s) throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Customer WHERE customerId=?", s);
-        if (rst.next()) {
-            return new Customer(rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3));
-        }
-        return null;
+        return session.find(Customer.class,s);
     }
 
     @Override
-    public boolean save(Customer entity) throws Exception {
-        return CrudUtil.execute("INSERT INTO Customer VALUES (?,?,?)", entity.getCustomerId(), entity.getName(), entity.getAddress());
+    public void save(Customer entity) throws Exception {
+       session.save(entity);
     }
 
     @Override
-    public boolean update(Customer customer) throws Exception {
-        return CrudUtil.execute("UPDATE Customer SET name=?, address=? WHERE customerId=?", customer.getName(), customer.getAddress(), customer.getCustomerId());
+    public void update(Customer customer) throws Exception {
+        session.merge(customer);
     }
 
     @Override
-    public boolean delete(String s) throws Exception {
-        return CrudUtil.execute("DELETE FROM Customer WHERE customerId=?", s);
+    public void delete(String s) throws Exception {
+        session.delete(session.load(Customer.class,s));
     }
 }

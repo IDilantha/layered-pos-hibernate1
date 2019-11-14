@@ -2,65 +2,49 @@ package lk.ijse.dep.pos.dao.custom.impl;
 
 import lk.ijse.dep.pos.dao.CrudUtil;
 import lk.ijse.dep.pos.dao.custom.OrderDAO;
+import lk.ijse.dep.pos.entity.Item;
 import lk.ijse.dep.pos.entity.Order;
+import org.hibernate.Session;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
+    private Session session;
 
     @Override
     public int getLastOrderId() throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1");
-        if (rst.next()) {
-            return rst.getInt(1);
-        } else {
-            return 0;
-        }
+        return (int) session.createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1").uniqueResult();
     }
 
     @Override
     public boolean existsByCustomerId(String customerId) throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM `Order` WHERE customerId=?", customerId);
-        return rst.next();
+        return (boolean) session.createNativeQuery("SELECT * FROM `Order` WHERE customerId=?", customerId).uniqueResult();
     }
 
     @Override
     public List<Order> findAll() throws Exception {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM `Order`");
-        List<Order> orders = new ArrayList<>();
-        while (rst.next()){
-            orders.add(new Order(rst.getInt(1),
-                    rst.getDate(2),
-                    rst.getString(3)));
-        }
-        return orders;
+        return session.createQuery("FROM `Order`").list();
     }
 
     @Override
     public Order find(Integer orderId) throws Exception {
-        ResultSet rst =CrudUtil.execute("SELECT * FROM `Order` WHERE id=?", orderId);
-        if (rst.next()){
-            return new Order(rst.getInt(1),
-                    rst.getDate(2),
-                    rst.getString(3));
-        }
-        return null;
+        return session.find(Order.class,orderId);
     }
 
     @Override
-    public boolean save(Order order) throws Exception {
-        return CrudUtil.execute("INSERT INTO `Order` VALUES (?,?,?)", order.getId(), order.getDate(), order.getCustomerId());
+    public void save(Order order) throws Exception {
+        session.save(order);
     }
 
     @Override
-    public boolean update(Order order) throws Exception {
-        return CrudUtil.execute("UPDATE `Order` SET name=?, address=? WHERE id=?", order.getDate(), order.getCustomerId(), order.getId());
+    public void update(Order order) throws Exception {
+        session.merge(order);
     }
 
     @Override
-    public boolean delete(Integer orderId) throws Exception {
-        return CrudUtil.execute("DELETE FROM `Order` WHERE id=?", orderId);
+    public void delete(Integer orderId) throws Exception {
+        session.delete(session.load(Order.class,orderId));
     }
 }
