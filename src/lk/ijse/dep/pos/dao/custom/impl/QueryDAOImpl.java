@@ -1,11 +1,8 @@
 package lk.ijse.dep.pos.dao.custom.impl;
 
-import lk.ijse.dep.pos.dao.CrudUtil;
 import lk.ijse.dep.pos.dao.custom.QueryDAO;
 import lk.ijse.dep.pos.entity.CustomEntity;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 public class QueryDAOImpl implements QueryDAO {
