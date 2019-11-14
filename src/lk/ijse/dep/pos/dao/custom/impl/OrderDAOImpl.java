@@ -10,6 +10,11 @@ public class OrderDAOImpl implements OrderDAO {
     private Session session;
 
     @Override
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    @Override
     public int getLastOrderId() throws Exception {
         return (int) session.createNativeQuery("SELECT id FROM `Order` ORDER BY id DESC LIMIT 1").uniqueResult();
     }

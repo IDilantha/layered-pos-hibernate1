@@ -2,10 +2,16 @@ package lk.ijse.dep.pos.dao.custom.impl;
 
 import lk.ijse.dep.pos.dao.custom.QueryDAO;
 import lk.ijse.dep.pos.entity.CustomEntity;
+import org.hibernate.Session;
 
 import java.util.List;
 
 public class QueryDAOImpl implements QueryDAO {
+
+    @Override
+    public void setSession(Session session) {
+        //this.session = session;
+    }
 
     @Override
     public CustomEntity getOrderInfo(int orderId) throws Exception {
