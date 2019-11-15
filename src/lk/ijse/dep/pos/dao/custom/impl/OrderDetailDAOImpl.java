@@ -1,5 +1,6 @@
 package lk.ijse.dep.pos.dao.custom.impl;
 
+import lk.ijse.dep.pos.dao.CrudDAOImpl;
 import lk.ijse.dep.pos.dao.custom.OrderDetailDAO;
 import lk.ijse.dep.pos.entity.OrderDetail;
 import lk.ijse.dep.pos.entity.OrderDetailPK;
@@ -7,13 +8,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class OrderDetailDAOImpl implements OrderDetailDAO {
-    private Session session;
-
-    @Override
-    public void setSession(Session session) {
-        this.session = session;
-    }
+public class OrderDetailDAOImpl extends CrudDAOImpl<OrderDetail,OrderDetailPK> implements OrderDetailDAO {
 
     @Override
     public List<OrderDetail> findAll() throws Exception {
@@ -25,20 +20,6 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
         return session.find(OrderDetail.class,orderDetailPK);
     }
 
-    @Override
-    public void save(OrderDetail orderDetail) throws Exception {
-        session.save(orderDetail);
-    }
-
-    @Override
-    public void update(OrderDetail orderDetail) throws Exception {
-        session.merge(orderDetail);
-    }
-
-    @Override
-    public void delete(OrderDetailPK orderDetailPK) throws Exception {
-        session.delete(session.load(OrderDetail.class,orderDetailPK));
-    }
 
     @Override
     public boolean existsByItemCode(String itemCode) throws Exception {

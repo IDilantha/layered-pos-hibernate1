@@ -1,5 +1,6 @@
 package lk.ijse.dep.pos.db;
 
+import lk.ijse.dep.crypto.DEPCrypt;
 import lk.ijse.dep.pos.entity.Customer;
 import lk.ijse.dep.pos.entity.Item;
 import lk.ijse.dep.pos.entity.Order;
@@ -12,6 +13,9 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory = buildSessionFactory();
@@ -19,8 +23,19 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
 
         File file = new File("resources/application.properties");
+        Properties properties = new Properties();
+
+        try(FileInputStream fis = new FileInputStream(file)){
+            properties.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
                 .loadProperties(file)
+                .applySetting("hibernate.connection.username", DEPCrypt.decode(properties.getProperty("hibernate.connection.username"),"dep4"))
+                .applySetting("hibernate.connection.password", DEPCrypt.decode(properties.getProperty("hibernate.connection.password"),"dep4"))
                 .build();
 
         Metadata metadata = new MetadataSources(standardRegistry)
