@@ -21,6 +21,11 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
+    public boolean existsByCustomerId(String customerId) throws Exception {
+        return (boolean) session.createNativeQuery("SELECT * FROM Customer WHERE customerId=?1").setParameter(1,customerId).uniqueResult();
+    }
+
+    @Override
     public List<Customer> findAll() throws Exception {
         return session.createQuery("FROM Customer",Customer.class).list();
     }

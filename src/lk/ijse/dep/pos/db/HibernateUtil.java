@@ -11,13 +11,16 @@ import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.io.File;
+
 public class HibernateUtil {
     private static SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
 
+        File file = new File("resources/application.properties");
         StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-                .loadProperties("application.properties")
+                .loadProperties(file)
                 .build();
 
         Metadata metadata = new MetadataSources(standardRegistry)

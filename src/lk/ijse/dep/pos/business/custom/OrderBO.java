@@ -10,7 +10,7 @@ public interface OrderBO extends SuperBO {
 
     int getLastOrderId() throws Exception;
 
-    boolean placeOrder(OrderDTO orderDTO) throws Exception;
+    void placeOrder(OrderDTO orderDTO) throws Exception;
 
     List<OrderDTO2> getOrderInfo(String query) throws Exception;
 

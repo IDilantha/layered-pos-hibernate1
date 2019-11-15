@@ -30,7 +30,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.ijse.dep.pos.db.DBConnection;
 
 import javax.swing.*;
 
@@ -165,7 +164,7 @@ public class MainFormController implements Initializable {
     }
 
     public void restoreBtn_onAction(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
+        /*FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Let's restore the backup");
         fileChooser.getExtensionFilters()
                 .add(new FileChooser.ExtensionFilter("SQL File", "*.sql"));
@@ -210,17 +209,17 @@ public class MainFormController implements Initializable {
                 pgb.setVisible(false);
             });
             new Thread(task).start();
-        }
+        }*/
     }
 
     public void backupBtn_onAction(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
+        /*FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save the DB Backup");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SQL File","*.sql"));
         File file = fileChooser.showSaveDialog(this.root.getScene().getWindow());
         if(file != null){
 
-       /*     Task<Void> task=new Task<Void>() {
+       *//*     Task<Void> task=new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
                     Process process = Runtime.getRuntime().exec("mysqldump -h"+ DBConnection.host + "--port"+DBConnection.port+" -u"+DBConnection.user+" -p"
@@ -228,7 +227,7 @@ public class MainFormController implements Initializable {
                             +file.getAbsolutePath()+(file.getAbsolutePath().endsWith(".sql")? "":".sql"));
                     return null;
                 }
-            };*/
+            };*//*
 
             Process process = null;
             try {
@@ -256,5 +255,6 @@ public class MainFormController implements Initializable {
 
 
         }
+    */
     }
 }

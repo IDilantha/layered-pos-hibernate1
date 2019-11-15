@@ -21,7 +21,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public boolean existsByCustomerId(String customerId) throws Exception {
-        return (boolean) session.createNativeQuery("SELECT * FROM `Order` WHERE customerId=?", customerId).uniqueResult();
+        return (boolean) session.createNativeQuery("SELECT * FROM `Order` WHERE customerId=?1").setParameter(1,customerId).uniqueResult();
     }
 
     @Override

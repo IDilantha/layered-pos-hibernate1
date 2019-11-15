@@ -20,6 +20,11 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
+    public boolean existsByItemId(String itemId) throws Exception {
+        return (boolean) session.createNativeQuery("SELECT * FROM Item WHERE code=?1").setParameter(1,itemId).uniqueResult();
+    }
+
+    @Override
     public List<Item> findAll() throws Exception {
         return session.createQuery("FROM Item",Item.class).list();
     }

@@ -7,4 +7,7 @@ public interface CustomerDAO extends CrudDAO<Customer, String> {
 
     String getLastCustomerId() throws Exception;
 
+    boolean existsByCustomerId(String customerId) throws Exception;
+
+
 }

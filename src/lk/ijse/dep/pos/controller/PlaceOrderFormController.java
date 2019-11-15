@@ -8,7 +8,6 @@ import lk.ijse.dep.pos.business.custom.OrderBO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import lk.ijse.dep.pos.db.DBConnection;
 import lk.ijse.dep.pos.dto.CustomerDTO;
 import lk.ijse.dep.pos.dto.ItemDTO;
 import lk.ijse.dep.pos.dto.OrderDTO;
@@ -95,7 +94,7 @@ public class PlaceOrderFormController {
 
             tempItems = itemBO.findAllItems();
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO123").show();
             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
         }
 
@@ -113,7 +112,7 @@ public class PlaceOrderFormController {
                     CustomerDTO customer = customerBO.findCustomer(selectedCustomerID);
                     txtCustomerName.setText(customer.getName());
                 } catch (Exception e) {
-                    new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO222").show();
                     Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
                 }
             }
@@ -145,7 +144,7 @@ public class PlaceOrderFormController {
                     txtUnitPrice.setText(item.getUnitPrice() + "");
                     txtQtyOnHand.setText(item.getQtyOnHand() + "");
                 } catch (Exception e) {
-                    new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO4444").show();
                     Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
                 }
             }
@@ -169,7 +168,7 @@ public class PlaceOrderFormController {
                             ItemDTO item = itemBO.findItem(selectedOrderDetail.getCode());
                             tempItem.setQtyOnHand(item.getQtyOnHand());
                         } catch (Exception e) {
-                            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+                            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO5555").show();
                             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
                         }
                     }
@@ -213,7 +212,12 @@ public class PlaceOrderFormController {
         // Generate the new order id
         int maxOrderId = 0;
         try {
-            maxOrderId = orderBO.getLastOrderId();
+//            maxOrderId = orderBO.getLastOrderId();
+//            if (maxOrderId == null) {
+//                maxOrderId = 0;
+//            } else {
+//                maxCode = Integer.parseInt(lastItemCode.replace("OD", ""));
+//            }
             maxOrderId++;
             if (maxOrderId < 10) {
                 lblId.setText("OD00" + maxOrderId);
@@ -223,7 +227,7 @@ public class PlaceOrderFormController {
                 lblId.setText("OD" + maxOrderId);
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO666").show();
             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
         }
     }
@@ -341,13 +345,13 @@ public class PlaceOrderFormController {
         OrderDTO order = new OrderDTO(orderId, null, cmbCustomerId.getSelectionModel().getSelectedItem(), orderDetails);
         try {
             orderBO.placeOrder(order);
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResourceAsStream("/lk/ijse/dep/pos/report/order-report.jasper"));
+            /*JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResourceAsStream("/lk/ijse/dep/pos/report/order-report.jasper"));
             Map<String, Object> params = new HashMap<>();
             params.put("orderId", orderId + "");
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
+            JasperViewer.viewReport(jasperPrint, false);*/
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO777").show();
             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
         }
 

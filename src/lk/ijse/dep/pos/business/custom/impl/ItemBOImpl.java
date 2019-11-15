@@ -6,8 +6,10 @@ import lk.ijse.dep.pos.dao.DAOFactory;
 import lk.ijse.dep.pos.dao.DAOTypes;
 import lk.ijse.dep.pos.dao.custom.ItemDAO;
 import lk.ijse.dep.pos.dao.custom.OrderDetailDAO;
+import lk.ijse.dep.pos.db.HibernateUtil;
 import lk.ijse.dep.pos.dto.ItemDTO;
 import lk.ijse.dep.pos.entity.Item;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,59 +20,92 @@ public class ItemBOImpl implements ItemBO {
     private ItemDAO itemDAO = DAOFactory.getInstance().getDAO(DAOTypes.ITEM);
 
     @Override
-    public boolean saveItem(ItemDTO item) throws Exception {
-        return itemDAO.save(new Item(item.getCode(),
-                item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
-    }
-
-    @Override
-    public boolean updateItem(ItemDTO item) throws Exception {
-        return itemDAO.save(new Item(item.getCode(),
-                item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
-    }
-
-    @Override
-    public boolean deleteItem(String itemCode) throws Exception {
-        if (orderDetailDAO.existsByItemCode(itemCode)){
-            throw new AlreadyExistsInOrderException("Item already exists in an order, hence unable to delete");
+    public void saveItem(ItemDTO item) throws Exception {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            session.save(new Item(item.getCode(),item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+            session.getTransaction().commit();
         }
-        return itemDAO.delete(itemCode);
+    }
+
+    @Override
+    public void updateItem(ItemDTO item) throws Exception {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            session.merge(new Item(item.getCode(),item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public void deleteItem(String itemCode) throws Exception {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            session.delete(itemCode);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public List<ItemDTO> findAllItems() throws Exception {
-        List<Item> allItems = itemDAO.findAll();
-        List<ItemDTO> dtos = new ArrayList<>();
-        for (Item item : allItems) {
-            dtos.add(new ItemDTO(item.getCode(),
-                    item.getDescription(),
-                    item.getQtyOnHand(),
-                    item.getUnitPrice()));
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            List<Item> allItems = itemDAO.findAll();
+            List<ItemDTO> dtos = new ArrayList<>();
+            for (Item item : allItems) {
+                dtos.add(new ItemDTO(item.getCode(),
+                        item.getDescription(),
+                        item.getQtyOnHand(),
+                        item.getUnitPrice()));
+            }
+            session.getTransaction().commit();
+            return dtos;
         }
-        return dtos;
     }
 
     @Override
     public String getLastItemCode() throws Exception {
-        return itemDAO.getLastItemCode();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            String lastItemCode = itemDAO.getLastItemCode();
+            session.getTransaction().commit();
+            return lastItemCode;
+        }
     }
 
     @Override
     public ItemDTO findItem(String itemCode) throws Exception {
-        Item item = itemDAO.find(itemCode);
-        return new ItemDTO(item.getCode(),
-                item.getDescription(),
-                item.getQtyOnHand(),
-                item.getUnitPrice());
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            itemDAO.find(itemCode);
+            Item item = itemDAO.find(itemCode);
+            session.getTransaction().commit();
+            return new ItemDTO(item.getCode(),
+                    item.getDescription(),
+                    item.getQtyOnHand(),
+                    item.getUnitPrice());
+        }
     }
 
     @Override
     public List<String> getAllItemCodes() throws Exception {
-        List<Item> allItems = itemDAO.findAll();
-        List<String> codes = new ArrayList<>();
-        for (Item item : allItems) {
-            codes.add(item.getCode());
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            itemDAO.setSession(session);
+            session.beginTransaction();
+            List<Item> allItems = itemDAO.findAll();
+            List<String> codes = new ArrayList<>();
+            for (Item item : allItems) {
+                codes.add(item.getCode());
+            }
+            session.getTransaction().commit();
+            return codes;
         }
-        return codes;
     }
 }
