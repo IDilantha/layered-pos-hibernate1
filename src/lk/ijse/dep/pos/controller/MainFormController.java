@@ -6,6 +6,7 @@ package lk.ijse.dep.pos.controller;/*
 
 import java.io.*;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXProgressBar;
@@ -163,8 +164,20 @@ public class MainFormController implements Initializable {
         }
     }
 
-    public void restoreBtn_onAction(ActionEvent actionEvent) {
-        /*FileChooser fileChooser = new FileChooser();
+    public void restoreBtn_onAction(ActionEvent actionEvent) throws IOException {
+        File propFile = new File("resources/application.properties");
+        FileInputStream fis = new FileInputStream(propFile);
+        Properties properties = new Properties();
+        properties.load(fis);
+        fis.close();
+
+        String password = properties.getProperty("hibernate.connection.password");
+        String username = properties.getProperty("hibernate.connection.username");
+        String host = properties.getProperty("ijse.dep.ip");
+        String port = properties.getProperty("ijse.dep.port");
+        String db = properties.getProperty("ijse.dep.db");
+
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Let's restore the backup");
         fileChooser.getExtensionFilters()
                 .add(new FileChooser.ExtensionFilter("SQL File", "*.sql"));
@@ -172,10 +185,10 @@ public class MainFormController implements Initializable {
 
         if (file != null) {
             String[] commands;
-            if (DBConnection.password.length()>0) {
-                commands = new String[]{"mysql", "-h", DBConnection.host, "--port",DBConnection.port,"-u",DBConnection.user, "-p" + DBConnection.password, DBConnection.db, "-e", "source " + file.getAbsolutePath()};
+            if (password.length()>0) {
+                commands = new String[]{"mysql", "-h", host, "--port",port,"-u",username, "-p" + password, db, "-e", "source " + file.getAbsolutePath()};
             }else {
-                commands = new String[]{"mysql", "-h", DBConnection.host, "--port",DBConnection.port,"-u", DBConnection.user,  DBConnection.db, "-e", "source " + file.getAbsolutePath()};
+                commands = new String[]{"mysql", "-h", host, "--port",port,"-u", username,  db, "-e", "source " + file.getAbsolutePath()};
             }
             this.root.getScene().setCursor(Cursor.WAIT);
             pgb.setVisible(true);
@@ -209,52 +222,74 @@ public class MainFormController implements Initializable {
                 pgb.setVisible(false);
             });
             new Thread(task).start();
-        }*/
+        }
     }
 
-    public void backupBtn_onAction(ActionEvent actionEvent) {
-        /*FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save the DB Backup");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SQL File","*.sql"));
-        File file = fileChooser.showSaveDialog(this.root.getScene().getWindow());
-        if(file != null){
+    public void backupBtn_onAction(ActionEvent actionEvent) throws IOException {
+        File propFile = new File("resources/application.properties");
+        FileInputStream fis = new FileInputStream(propFile);
+        Properties properties = new Properties();
+        properties.load(fis);
+        fis.close();
 
-       *//*     Task<Void> task=new Task<Void>() {
+        String password = properties.getProperty("hibernate.connection.password");
+        String username = properties.getProperty("hibernate.connection.username");
+        String host = properties.getProperty("ijse.dep.ip");
+        String port = properties.getProperty("ijse.dep.port");
+        String db = properties.getProperty("ijse.dep.db");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save the DB Backup");
+        fileChooser.getExtensionFilters().
+                add(new FileChooser.ExtensionFilter("SQL File", "*.sql"));
+        File file = fileChooser.showSaveDialog(this.root.getScene().getWindow());
+        if (file != null) {
+
+            // Now, we have to backup the DB...
+            // Long running task == We have to backup
+            this.root.getScene().setCursor(Cursor.WAIT);
+            this.pgb.setVisible(true);
+
+            Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    Process process = Runtime.getRuntime().exec("mysqldump -h"+ DBConnection.host + "--port"+DBConnection.port+" -u"+DBConnection.user+" -p"
-                            +DBConnection.password+" "+DBConnection.db+" --result-file "
-                            +file.getAbsolutePath()+(file.getAbsolutePath().endsWith(".sql")? "":".sql"));
-                    return null;
+
+                    String[] commands;
+                    if (password.length() > 0) {
+                        commands = new String[]{"mysqldump", "-h", host, "-u", username,
+                                "-p" + password, "--port", port, db, "--result-file", file.getAbsolutePath() +
+                                ((file.getAbsolutePath().endsWith(".sql")) ? "" : ".sql")};
+                    } else {
+                        commands = new String[]{"mysqldump", "-h", host, "-u", username, "--port", port,
+                                db, "--result-file", file.getAbsolutePath() + ((file.getAbsolutePath().endsWith(".sql")) ? "" : ".sql")};
+                    }
+
+                    Process process = Runtime.getRuntime().exec(commands);
+                    int exitCode = process.waitFor();
+                    if (exitCode != 0) {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                        br.lines().forEach(System.out::println);
+                        br.close();
+                        throw new RuntimeException("Backup karanna Baa wade Kachal");
+                    } else {
+                        return null;
+                    }
                 }
-            };*//*
+            };
 
-            Process process = null;
-            try {
-                process = Runtime.getRuntime().exec("mysqldump -h"+ DBConnection.host +" -u"+DBConnection.user+" -p"
-                        +DBConnection.password+" "+DBConnection.db+" --result-file "
-                        +file.getAbsolutePath()+(file.getAbsolutePath().endsWith(".sql")? "":".sql"));
-                int exitCode = process.waitFor();
-                pgb.setVisible(true);
+            task.setOnSucceeded(event -> {
+                this.pgb.setVisible(false);
+                this.root.getScene().setCursor(Cursor.DEFAULT);
+                new Alert(Alert.AlertType.INFORMATION, "Backup process has been done successfully").show();
+            });
 
-                if (exitCode !=0){
-                    BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-                    br.lines().forEach(System.out::println);
-                    br.close();
-                    throw new RuntimeException("wade kachal");
-                }else {
-                    new Alert(Alert.AlertType.INFORMATION,"Database Backedup Successfully").show();
-                    pgb.setVisible(false);
-                }
-                System.out.println(exitCode);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            task.setOnFailed(event -> {
+                this.pgb.setVisible(false);
+                this.root.getScene().setCursor(Cursor.DEFAULT);
+                new Alert(Alert.AlertType.ERROR, "Failed to back up. Contact DEEPO").show();
+            });
 
+            new Thread(task).start();
 
         }
-    */
     }
 }

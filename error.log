@@ -2036,3 +2036,151 @@ Nov 15, 2019 10:11:41 AM javafx.fxml.FXMLLoader$ValueElement processValue
 WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
 Nov 15, 2019 10:11:50 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
 INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:22:54 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:23:27 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.7.Final}
+Nov 15, 2019 10:23:27 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+Nov 15, 2019 10:23:27 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 15, 2019 10:23:27 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:23:27 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=root, password=****}
+Nov 15, 2019 10:23:27 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 15, 2019 10:23:27 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 15, 2019 10:23:28 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+Nov 15, 2019 10:23:29 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000038: Composite-id class does not override equals(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:23:29 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000039: Composite-id class does not override hashCode(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:23:30 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6e0d4a8] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Nov 15, 2019 10:23:30 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Nov 15, 2019 10:23:30 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:24:08 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:24:38 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.7.Final}
+Nov 15, 2019 10:24:38 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+Nov 15, 2019 10:24:38 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 15, 2019 10:24:38 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:24:38 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=root, password=****}
+Nov 15, 2019 10:24:38 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 15, 2019 10:24:38 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 15, 2019 10:24:38 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+Nov 15, 2019 10:24:39 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000038: Composite-id class does not override equals(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:24:39 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000039: Composite-id class does not override hashCode(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:24:39 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30272916] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Nov 15, 2019 10:24:39 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Nov 15, 2019 10:24:39 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:28:41 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:29:30 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.7.Final}
+Nov 15, 2019 10:29:31 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+Nov 15, 2019 10:29:31 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 15, 2019 10:29:31 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:29:31 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=root, password=****}
+Nov 15, 2019 10:29:31 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 15, 2019 10:29:31 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 15, 2019 10:29:31 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+Nov 15, 2019 10:29:31 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000038: Composite-id class does not override equals(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:29:31 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000039: Composite-id class does not override hashCode(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:29:32 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6e0d4a8] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Nov 15, 2019 10:29:32 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Nov 15, 2019 10:29:32 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:31:51 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:31:53 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.7.Final}
+Nov 15, 2019 10:31:53 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+Nov 15, 2019 10:31:53 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 15, 2019 10:31:53 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:31:53 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=root, password=****}
+Nov 15, 2019 10:31:53 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 15, 2019 10:31:53 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 15, 2019 10:31:54 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+Nov 15, 2019 10:31:54 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000038: Composite-id class does not override equals(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:31:54 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000039: Composite-id class does not override hashCode(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:31:54 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6cb6c61f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Nov 15, 2019 10:31:55 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Nov 15, 2019 10:31:58 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:32:00 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:32:02 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:32:05 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:32:25 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:33:23 AM javafx.fxml.FXMLLoader$ValueElement processValue
+WARNING: Loading FXML document with JavaFX API of version 11.0.1 by JavaFX runtime of version 8.0.221
+Nov 15, 2019 10:33:41 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.4.7.Final}
+Nov 15, 2019 10:33:41 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+Nov 15, 2019 10:33:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 15, 2019 10:33:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
+Nov 15, 2019 10:33:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=root, password=****}
+Nov 15, 2019 10:33:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 15, 2019 10:33:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 15, 2019 10:33:41 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+Nov 15, 2019 10:33:42 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000038: Composite-id class does not override equals(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:33:42 AM org.hibernate.mapping.RootClass checkCompositeIdentifier
+WARN: HHH000039: Composite-id class does not override hashCode(): lk.ijse.dep.pos.entity.OrderDetailPK
+Nov 15, 2019 10:33:43 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@199e4c2b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Nov 15, 2019 10:33:43 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Nov 15, 2019 10:33:43 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/PosWithHibernate2?createDatabaseIfNotExist=true]
