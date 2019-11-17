@@ -212,12 +212,7 @@ public class PlaceOrderFormController {
         // Generate the new order id
         int maxOrderId = 0;
         try {
-//            maxOrderId = orderBO.getLastOrderId();
-//            if (maxOrderId == null) {
-//                maxOrderId = 0;
-//            } else {
-//                maxCode = Integer.parseInt(lastItemCode.replace("OD", ""));
-//            }
+            maxOrderId = orderBO.getLastOrderId();
             maxOrderId++;
             if (maxOrderId < 10) {
                 lblId.setText("OD00" + maxOrderId);
@@ -227,7 +222,7 @@ public class PlaceOrderFormController {
                 lblId.setText("OD" + maxOrderId);
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO666").show();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong, please contact DEPPO").show();
             Logger.getLogger("lk.ijse.dep.pos.controller").log(Level.SEVERE, null,e);
         }
     }

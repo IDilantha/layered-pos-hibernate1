@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
--- Host: localhost    Database: JDBC
+-- Host: localhost    Database: PosWithHibernate2
 -- ------------------------------------------------------
 -- Server version	5.7.27-0ubuntu0.18.04.1
 
@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `Customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Customer` (
-  `customerId` varchar(10) NOT NULL,
-  `name` varchar(15) DEFAULT NULL,
-  `address` varchar(20) DEFAULT NULL,
+  `customerId` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +36,7 @@ CREATE TABLE `Customer` (
 
 LOCK TABLES `Customer` WRITE;
 /*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
-INSERT INTO `Customer` VALUES ('C001','Alisa','Homagama'),('C002','Waduma','Horana');
+INSERT INTO `Customer` VALUES ('C001','Pinwatta','Alisa'),('C002','Balangoda','Pande'),('C003','Panadura','Pera'),('C004','Borella','Punchiya');
 /*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,10 +48,10 @@ DROP TABLE IF EXISTS `Item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Item` (
-  `code` varchar(10) NOT NULL,
-  `description` varchar(30) DEFAULT NULL,
-  `unitPrice` decimal(6,2) DEFAULT NULL,
-  `qtyOnHand` int(5) DEFAULT NULL,
+  `code` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `qtyOnHand` int(11) NOT NULL,
+  `unitPrice` double NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -62,7 +62,7 @@ CREATE TABLE `Item` (
 
 LOCK TABLES `Item` WRITE;
 /*!40000 ALTER TABLE `Item` DISABLE KEYS */;
-INSERT INTO `Item` VALUES ('I001','soap',60.00,2),('I002','item11',150.00,45),('I003','item53',125.00,85);
+INSERT INTO `Item` VALUES ('I001','Soap',50,50),('I002','Pen',91,15);
 /*!40000 ALTER TABLE `Item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,11 +76,10 @@ DROP TABLE IF EXISTS `Order`;
 CREATE TABLE `Order` (
   `id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
-  `customerId` varchar(10) DEFAULT NULL,
+  `customer_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKckicmtwun913u69pha7agsgpd` (`customerId`),
-  CONSTRAINT `FKckicmtwun913u69pha7agsgpd` FOREIGN KEY (`customerId`) REFERENCES `Customer` (`customerId`),
-  CONSTRAINT `Order_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `Customer` (`customerId`)
+  KEY `FKhabn2vgq83q3khf4moph0nrv5` (`customer_id`),
+  CONSTRAINT `FKhabn2vgq83q3khf4moph0nrv5` FOREIGN KEY (`customer_id`) REFERENCES `Customer` (`customerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -90,7 +89,7 @@ CREATE TABLE `Order` (
 
 LOCK TABLES `Order` WRITE;
 /*!40000 ALTER TABLE `Order` DISABLE KEYS */;
-INSERT INTO `Order` VALUES (1,'2019-09-30','C001'),(2,'2019-09-30','C001');
+INSERT INTO `Order` VALUES (1,'2019-11-15','C002');
 /*!40000 ALTER TABLE `Order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,16 +101,14 @@ DROP TABLE IF EXISTS `OrderDetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `OrderDetail` (
-  `orderId` int(11) NOT NULL,
-  `itemCode` varchar(10) NOT NULL,
-  `qty` int(5) DEFAULT NULL,
-  `unitPrice` decimal(6,2) DEFAULT NULL,
-  PRIMARY KEY (`orderId`,`itemCode`),
-  KEY `FKtogd3d0kvb3mreeh4pn7qox19` (`itemCode`),
-  CONSTRAINT `FK21x4a3ee3h5uwombp0n7cayng` FOREIGN KEY (`orderId`) REFERENCES `Order` (`id`),
-  CONSTRAINT `FKtogd3d0kvb3mreeh4pn7qox19` FOREIGN KEY (`itemCode`) REFERENCES `Item` (`code`),
-  CONSTRAINT `OrderDetail_ibfk_2` FOREIGN KEY (`itemCode`) REFERENCES `Item` (`code`),
-  CONSTRAINT `OrderDetail_ibfk_3` FOREIGN KEY (`orderId`) REFERENCES `Order` (`id`)
+  `item_code` varchar(255) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `unit_price` double DEFAULT NULL,
+  PRIMARY KEY (`item_code`,`order_id`),
+  KEY `FKdc1kkre95n6msywx6kvg0us5n` (`order_id`),
+  CONSTRAINT `FKdc1kkre95n6msywx6kvg0us5n` FOREIGN KEY (`order_id`) REFERENCES `Order` (`id`),
+  CONSTRAINT `FKos0jfcy9wj0u7k2cpqwn41l4t` FOREIGN KEY (`item_code`) REFERENCES `Item` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -121,7 +118,7 @@ CREATE TABLE `OrderDetail` (
 
 LOCK TABLES `OrderDetail` WRITE;
 /*!40000 ALTER TABLE `OrderDetail` DISABLE KEYS */;
-INSERT INTO `OrderDetail` VALUES (1,'I001',2,60.00),(1,'I002',5,150.00),(1,'I003',15,125.00),(2,'I001',1,60.00);
+INSERT INTO `OrderDetail` VALUES ('I001',1,7,60),('I002',1,9,15);
 /*!40000 ALTER TABLE `OrderDetail` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -134,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-16  0:16:01
+-- Dump completed on 2019-11-17 12:37:50
