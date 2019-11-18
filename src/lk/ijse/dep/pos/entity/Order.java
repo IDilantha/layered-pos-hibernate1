@@ -64,9 +64,6 @@ public class Order implements SuperEntity{
         this.orderDetails.add(orderDetail);
     }
 
-
-
-
     @Override
     public String toString() {
         return "Order{" +

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CashSaleBill" pageWidth="226" pageHeight="792" whenNoDataType="BlankPage" columnWidth="198" leftMargin="14" rightMargin="14" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="73c88906-3dd1-4b8e-a8df-09685069782d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLConnection"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="414"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="575"/>
+	<parameter name="orderId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT `PosWithHibernate2`.`Customer`.name,
+	`PosWithHibernate2`.`Order`.date,
+	`PosWithHibernate2`.`Customer`.`customerId`,
+	`PosWithHibernate2`.`Order`.id,
+	SUM( `PosWithHibernate2`.`OrderDetail`.qty * `PosWithHibernate2`.`OrderDetail`.unit_price) AS total
+FROM `PosWithHibernate2`.`OrderDetail`
+	INNER JOIN `PosWithHibernate2`.`Order` ON 
+	 `PosWithHibernate2`.`OrderDetail`.order_id = `PosWithHibernate2`.`Order`.id 
+	INNER JOIN `PosWithHibernate2`.`Customer` ON 
+	 `PosWithHibernate2`.`Order`.customer_id = `PosWithHibernate2`.`Customer`.`customerId`
+GROUP BY  `PosWithHibernate2`.`Order`.id]]>
+	</queryString>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Order"/>
+	</field>
+	<field name="customerId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="customerId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Order"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Customer"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="198" height="20" uuid="7d2c5014-3b2d-4983-93ee-134770d178c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="DejaVu Sans" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modern POS - DEP 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="198" height="14" uuid="c7d03fdf-d12b-45ca-8f41-861996845113"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IJSE, Galle Road, Panadura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="198" height="14" uuid="b2000f24-eb10-4360-8c1e-2f05114c7292"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="DejaVu Sans" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tel: +94 711 202 202]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="48" width="198" height="11" uuid="9acb8284-04dd-4899-86c6-5dad55c20c18">
+					<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[(Open from 08.00 hrs to 18.00 hrs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="198" height="18" uuid="43488a57-2af1-4652-8b75-61ce08aeb69a"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Issue Order]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="16" uuid="670d9bbf-e3fe-4f6a-af5e-2582925b77e2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<text><![CDATA[Order ID :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="0" width="60" height="16" uuid="0572a3a0-0e9c-4413-8077-834272d76a46">
+					<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+				</reportElement>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{orderId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="0" width="30" height="16" uuid="34eeae0f-51d8-4cc4-ad2f-4413db8e0071"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="140" y="0" width="58" height="16" uuid="031d8b4e-1ea9-4ae3-b1e6-d012b4e3f410"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="16" width="40" height="16" uuid="caa023d4-8655-4290-873b-7cea311d8d51"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<text><![CDATA[Cus ID :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="16" width="50" height="16" uuid="b127f237-f65c-4883-8763-e32421459e0b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<text><![CDATA[Cus Name :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="16" width="50" height="16" uuid="2eaccea0-1d3d-4b59-9e49-1c4e67a13a25"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="16" width="58" height="16" uuid="66ef9490-1f8d-4606-80db-4cd33d8d97b6"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="30" uuid="2070a979-bf0d-44a0-ab31-c82121739dba"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["order-detail-report.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27">
+			<textField pattern="#,##0.00#;#,##0.00#-">
+				<reportElement x="120" y="0" width="78" height="21" uuid="c7a98560-497b-4dbf-b41d-ba309397cadf"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="21" uuid="0d7eb193-4979-4913-bc26-30987cf71b64"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NET AMOUNT]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="1" width="198" height="20" uuid="3fe4f3ae-4244-4688-be4a-26130fab1e0d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dotted"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</frame>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

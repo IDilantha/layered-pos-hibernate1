@@ -73,8 +73,7 @@ public class OrderBOImpl implements OrderBO {
             List<CustomEntity> ordersInfo = queryDAO.getOrdersInfo(query + "%");
             List<OrderDTO2> dtos = new ArrayList<>();
             for (CustomEntity info : ordersInfo) {
-                dtos.add(new OrderDTO2(info.getOrderId(),
-                        info.getOrderDate(), info.getCustomerId(), info.getCustomerName(), info.getOrderTotal()));
+                dtos.add(new OrderDTO2(info.getOrderId(),info.getOrderDate(), info.getCustomerId(), info.getCustomerName(), info.getOrderTotal()));
             }
             session.getTransaction().commit();
             return dtos;

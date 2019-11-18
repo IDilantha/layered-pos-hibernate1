@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub-report" pageWidth="198" pageHeight="842" columnWidth="198" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="2b35bc81-9ee4-4a29-bf3d-e594e15e1efc">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLConnection"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="orderId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT `PosWithHibernate2`.`OrderDetail`.item_code,
+	`PosWithHibernate2`.`OrderDetail`.qty,
+	`PosWithHibernate2`.`OrderDetail`.unit_price,
+	`PosWithHibernate2`.`Item`.description,
+	OrderDetail.qty * OrderDetail.unit_price AS total
+FROM `PosWithHibernate2`.`OrderDetail`
+	INNER JOIN `PosWithHibernate2`.`Item` ON 
+	 `PosWithHibernate2`.`OrderDetail`.item_code = `PosWithHibernate2`.`Item`.code 
+	 AND `PosWithHibernate2`.`OrderDetail`.item_code = `PosWithHibernate2`.`Item`.code 
+WHERE 
+	 `PosWithHibernate2`.`OrderDetail`.order_id = $P{orderId}]]>
+	</queryString>
+	<field name="item_code" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="itemCode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="OrderDetail"/>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="OrderDetail"/>
+	</field>
+	<field name="unit_price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="unitPrice"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="OrderDetail"/>
+	</field>
+	<field name="description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Item"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="1" width="198" height="21" uuid="dca57fd1-5081-4221-94a4-4ed640c4892c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Dotted"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<staticText>
+					<reportElement x="-1" y="1" width="40" height="21" uuid="b3dbe092-cc8d-46ba-b4a5-ad66a37df774">
+						<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ITEM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="39" y="1" width="70" height="21" uuid="0f1c556e-795c-45c6-8305-16b3e850c5ba"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRICE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="109" y="1" width="30" height="21" uuid="4b3f7f8b-72e2-4959-8bda-a1d780c3f26c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[QTY.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="139" y="1" width="58" height="21" uuid="f8341d15-9c6a-4fef-8452-fea3bda088ac"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AMOUNT]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="198" height="14" uuid="88fece02-c828-4a30-ba86-f9d38ffebc73">
+					<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="14" width="70" height="14" uuid="b7f41efb-5aa9-43e1-b890-c6c56d51ec62"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unit_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="14" width="30" height="14" uuid="0911994b-7560-4236-aebd-57090eb071cd"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="14" width="58" height="14" uuid="01a567f3-fbc1-4caa-8be8-8fbd4fd4f158"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="40" height="14" uuid="196ead14-fc06-4f41-b1f4-2daa2f000572">
+					<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
